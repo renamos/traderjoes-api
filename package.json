@@ -1,0 +1,14 @@
+{
+  "name": "traderjoes-api",
+  "version": "1.0.0",
+  "description": "An API for Trader Joe's products",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "me",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2"
+  }
+}
