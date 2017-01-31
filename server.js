@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(bodyParser.json());
 
-var port = process.env.PORT || 8000; // set our port
+var port = process.env.PORT || 8800; // set our port
 
 mongoose.connect(config.databaseURL); // connect to our database
 
