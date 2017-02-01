@@ -4,9 +4,7 @@ var product = require('../models/product-models.js');
 var faker = require('faker');
 
 
-
-
-// Add headers 
+// Add headers
 router.use(function (req, res, next) {
     console.log("hoola");
     // Website you wish to allow to connect
@@ -54,28 +52,33 @@ router.route('/create')
     });
 
 
-
 router.route('/create-fake')
     .post(function (req, res) {
         //faker
-            var newProduct = new product();
-            newProduct.name = faker.commerce.productName();
-            newProduct.photo = faker.commerce.price();
-            newProduct.save(function (err, product) {
-                if (err) {
-                    console.log(err)
-                    return
-                }
+        var newProduct = new product();
+        newProduct.name = faker.commerce.productName();
+        newProduct.price = faker.commerce.price();
+        newProduct.photo = faker.image.imageUrl();
+        newProduct.category_ID = faker.commerce.product();
+        newProduct.description = faker.lorem.sentence();
+        newProduct.grams = faker.random.number();
+        newProduct.seasonal = faker.random.boolean();
+        newProduct.discontinued = faker.random.boolean();
+        newProduct.type = faker.commerce.productMaterial();
+        newProduct.date_added = faker.date.past();
+        newProduct.save(function (err, product) {
+            if (err) {
+                console.log(err)
+                return
+            }
 
-                res.json({
-                    message: 'New product has been created!',
-                    data: product
-                })
+            res.json({
+                message: 'New product has been created!',
+                data: product
+            })
 
         })
     });
-
-
 
 
 router.route('/all')
