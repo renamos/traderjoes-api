@@ -55,8 +55,6 @@ router.route('/create')
 router.route('/create-fake')
     .post(function (req, res) {
         //faker
-
-        for (var i = 0; i <= 99; i++) {
             var newProduct = new product();
             newProduct.name = faker.commerce.productName();
             newProduct.price = faker.commerce.price();
@@ -80,7 +78,6 @@ router.route('/create-fake')
                 })
 
             })
-        }
     });
 
 
