@@ -55,29 +55,32 @@ router.route('/create')
 router.route('/create-fake')
     .post(function (req, res) {
         //faker
-        var newProduct = new product();
-        newProduct.name = faker.commerce.productName();
-        newProduct.price = faker.commerce.price();
-        newProduct.photo = faker.image.imageUrl();
-        newProduct.category_ID = faker.commerce.product();
-        newProduct.description = faker.lorem.sentence();
-        newProduct.grams = faker.random.number();
-        newProduct.seasonal = faker.random.boolean();
-        newProduct.discontinued = faker.random.boolean();
-        newProduct.type = faker.commerce.productMaterial();
-        newProduct.date_added = faker.date.past();
-        newProduct.save(function (err, product) {
-            if (err) {
-                console.log(err)
-                return
-            }
 
-            res.json({
-                message: 'New product has been created!',
-                data: product
+        for (var i = 0; i <= 99; i++) {
+            var newProduct = new product();
+            newProduct.name = faker.commerce.productName();
+            newProduct.price = faker.commerce.price();
+            newProduct.photo = faker.image.imageUrl();
+            newProduct.category_ID = faker.commerce.product();
+            newProduct.description = faker.lorem.sentence();
+            newProduct.grams = faker.random.number();
+            newProduct.seasonal = faker.random.boolean();
+            newProduct.discontinued = faker.random.boolean();
+            newProduct.type = faker.commerce.productMaterial();
+            newProduct.date_added = faker.date.past();
+            newProduct.save(function (err, product) {
+                if (err) {
+                    console.log(err)
+                    return
+                }
+
+                res.json({
+                    message: 'New product has been created!',
+                    data: product
+                })
+
             })
-
-        })
+        }
     });
 
 
