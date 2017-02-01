@@ -55,13 +55,12 @@ router.route('/create')
 
 
 
-router.route('/create-hundred')
+router.route('/create-fake')
     .post(function (req, res) {
         //faker
-        for(var i =0; i<= 100; i++) {
             var newProduct = new product();
-            newProduct.name = faker.commerce.productName;
-            newProduct.photo = faker.commerce.price;
+            newProduct.name = faker.commerce.productName();
+            newProduct.photo = faker.commerce.price();
             newProduct.save(function (err, product) {
                 if (err) {
                     console.log(err)
@@ -72,9 +71,8 @@ router.route('/create-hundred')
                     message: 'New product has been created!',
                     data: product
                 })
-            })
 
-        }
+        })
     });
 
 
