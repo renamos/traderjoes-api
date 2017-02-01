@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var product = require('../models/product-models.js')
+var product = require('../models/product-models.js');
+var faker = require('faker');
 
 
 
@@ -53,6 +54,32 @@ router.route('/create')
     });
 
 
+
+router.route('/create-hundred')
+    .post(function (req, res) {
+        //faker
+        for(var i =0; i<= 100; i++) {
+            var newProduct = new product();
+            newProduct.name = faker.commerce.productName;
+            newProduct.photo = faker.commerce.price;
+            newProduct.save(function (err, product) {
+                if (err) {
+                    console.log(err)
+                    return
+                }
+
+                res.json({
+                    message: 'New product has been created!',
+                    data: product
+                })
+            })
+
+        }
+    });
+
+
+
+
 router.route('/all')
     .get(function (req, res) {
         console.log('get /all')
@@ -77,7 +104,7 @@ router.route('/delete/:id')
                 return
             }
             res.json({
-                message: 'Product successfully deleted!',
+                message: 'Product ID' + product + 'successfully deleted!',
                 ok: true
             });
         });

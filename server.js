@@ -8,6 +8,7 @@ var express = require('express'); // call express
 var app = express(); // define our app using express
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var faker = require('faker');
 
 var ProductRoutes = require('./routes/product-routes.js')
 var CategoryRoutes = require('./routes/category-routes.js')
@@ -31,6 +32,8 @@ db.once('open', function () {
 });
 
 // more routes for our API will happen here
+
+console.log(faker.fake("{{commerce.productName}}, {{commerce.price}} {{image.imageUrl}}"));
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
