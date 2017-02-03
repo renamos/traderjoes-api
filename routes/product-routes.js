@@ -84,19 +84,33 @@ router.route('/create-fake')
 
 router.route('/all')
     .get(function (req, res) {
-                product.find().sort().limit(50).exec(function (err, product) {
-                    if (err) {
-                        res.json({
-                            message: 'something went wrong'
-                        })
-                        return
-                    }
-                    res.json({
-                        image: product
-                    })
-                })
-
+        product.find(function (err, products) {
+            if (err) {
+                console.log(err)
+                return
+            }
+            res.json({
+                data: products
+            })
+        })
+            .sort().limit(50)
     });
+
+router.route('/')
+.get(function (req, res) {
+    imageModel.find().sort({"created_at": -1}).limit(9).exec(function (err, image) {
+        if (err) {
+            res.json({
+                message: 'something went wrong'
+            })
+            return
+        }
+        res.json({
+            image: image
+        })
+    })
+
+})
 
 router.route('/delete/:id')
     .post(function (req, res) {
