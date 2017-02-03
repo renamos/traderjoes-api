@@ -92,24 +92,9 @@ router.route('/all')
             res.json({
                 data: products
             })
-        }).sort("name").limit(50)
+        }).sort("name")
     });
 
-router.route('/')
-.get(function (req, res) {
-    imageModel.find().sort({"created_at": -1}).limit(9).exec(function (err, image) {
-        if (err) {
-            res.json({
-                message: 'something went wrong'
-            })
-            return
-        }
-        res.json({
-            image: image
-        })
-    })
-
-})
 
 router.route('/delete/:id')
     .post(function (req, res) {
