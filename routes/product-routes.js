@@ -55,7 +55,6 @@ router.route('/create')
 router.route('/create-fake')
     .post(function (req, res) {
         //faker
-        for(var i = 0; i <= 100; i++) {
             var newProduct = new product();
             newProduct.name = faker.commerce.productName();
             newProduct.sku = faker.finance.account();
@@ -80,22 +79,23 @@ router.route('/create-fake')
                 })
 
             })
-        }
     });
 
 
 router.route('/all')
     .get(function (req, res) {
-        console.log('get /all')
-        product.find(function (err, products) {
-            if (err) {
-                console.log(err)
-                return
-            }
-            res.json({
-                data: products
-            })
-        })
+                product.find().sort().limit(50).exec(function (err, product) {
+                    if (err) {
+                        res.json({
+                            message: 'something went wrong'
+                        })
+                        return
+                    }
+                    res.json({
+                        image: product
+                    })
+                })
+
     });
 
 router.route('/delete/:id')
