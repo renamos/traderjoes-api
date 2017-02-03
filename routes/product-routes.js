@@ -92,8 +92,7 @@ router.route('/all')
             res.json({
                 data: products
             })
-        })
-            .sort().limit(50)
+        }).sort("name").limit(50)
     });
 
 router.route('/')
