@@ -1,6 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var userModel = require('../models/user-models.js')
+var userModel = require('../models/user-models.js');
+var passwordHash = require('password-hash');
+var jwt = require('jsonwebtoken');
+var secret = require('../config').secret;
 
 router.route('/')
     .get(function (req, res) {
@@ -34,7 +37,7 @@ router.route('/create')
             var newUser = new userModel();
             newUser.username = req.body.username;
             newUser.email = req.body.email;
-            newUser.password = req.body.password;
+            newUser.password = passwordHash.generate(req.body.password);
             newUser.firstName = req.body.firstName;
             newUser.lastName = req.body.lastName;
             newUser.city = req.body.city;
@@ -54,6 +57,37 @@ router.route('/create')
         })
 
     });
+
+router.route('/log-in')
+    .post(function (req, res) {
+        userModel.findOne({username: req.body.username},
+            function (err, user) {
+                if (err) {
+                    console.log(err)
+                    return
+                }
+                //check if user exists
+                if (!user) {
+                    res.json({
+                        message: 'User does not exist.'
+                    })
+                    return
+                }
+                //check if password is correct
+                if (!passwordHash.verify(req.body.password, user.password)) {
+                    res.json({
+                        message: 'Password is incorrect.'
+                    })
+                    return
+                }
+                //User and password are correct
+                var token = jwt.sign(user, secret, {expiresIn: 3660});
+                res.json({
+                    newToken: token
+                })
+            })
+    });
+
 
 router.route('/all')
     .get(function (req, res) {
