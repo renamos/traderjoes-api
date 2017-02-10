@@ -33,7 +33,6 @@ db.once('open', function () {
 
 // more routes for our API will happen here
 
-console.log(faker.fake("{{commerce.productName}}, {{commerce.price}} {{image.imageUrl}}"));
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
