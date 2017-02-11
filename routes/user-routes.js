@@ -32,8 +32,9 @@ router.route('/create')
                 res.json({
                     message: 'User already exists!'
                 })
+                return
             }
-            //User doesn't exists, so we create user
+            //User doesn't exist, so we create user
             var newUser = new userModel();
             newUser.username = req.body.username;
             newUser.email = req.body.email;
@@ -106,7 +107,7 @@ router.route('/:id')
     .delete(function (req, res) {
         userModel.remove({
             _id: req.params.id
-        }, function (err, bear) {
+        }, function (err) {
             if (err) {
                 console.log(err)
                 return
