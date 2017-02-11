@@ -9,6 +9,7 @@ var app = express(); // define our app using express
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var faker = require('faker');
+var cors = require('cors')
 
 var ProductRoutes = require('./routes/product-routes.js')
 var CategoryRoutes = require('./routes/category-routes.js')
@@ -20,6 +21,8 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
+
+app.use(cors());
 
 var port = process.env.PORT || 8800; // set our port
 
