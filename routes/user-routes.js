@@ -60,16 +60,16 @@ router.route('/create')
 
 router.route('/log-in')
     .post(function (req, res) {
-        userModel.findOne({username: req.body.username},
-            function (err, user) {
+        userModel.findOne({email: req.body.email},
+            function (err, email) {
                 if (err) {
                     console.log(err)
                     return
                 }
                 //check if user exists
-                if (!user) {
+                if (!email) {
                     res.json({
-                        message: 'User does not exist.'
+                        message: 'Email does not exist.'
                     })
                     return
                 }
