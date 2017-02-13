@@ -75,7 +75,7 @@ router.route('/log-in')
                     return
                 }
                 //check if password is correct
-                if (!passwordHash.verify(req.body.password, user.password)) {
+                if (!passwordHash.verify(req.body.password, req.body.password)) {
                     res.json({
                         message: 'Password is incorrect.'
                     })

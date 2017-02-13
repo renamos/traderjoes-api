@@ -9,7 +9,7 @@ var app = express(); // define our app using express
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var faker = require('faker');
-var cors = require('cors')
+var cors = require('cors');
 
 var ProductRoutes = require('./routes/product-routes.js')
 var CategoryRoutes = require('./routes/category-routes.js')
