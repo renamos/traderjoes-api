@@ -38,6 +38,7 @@ router.route('/create')
             var newUser = new userModel();
             newUser.username = req.body.username;
             newUser.email = req.body.email;
+            console.log(req.body.password);
             newUser.password = passwordHash.generate(req.body.password);
             newUser.firstName = req.body.firstName;
             newUser.lastName = req.body.lastName;
@@ -62,20 +63,20 @@ router.route('/create')
 router.route('/log-in')
     .post(function (req, res) {
         userModel.findOne({email: req.body.email},
-            function (err, email) {
+            function (err, user) {
                 if (err) {
                     console.log(err)
                     return
                 }
                 //check if user exists
-                if (!email) {
+                if (!user) {
                     res.json({
                         message: 'Email does not exist.'
                     })
                     return
                 }
                 //check if password is correct
-                if (!passwordHash.verify(req.body.password, req.body.password)) {
+                if (!passwordHash.verify(req.body.password, user.password)) {
                     res.json({
                         message: 'Password is incorrect.'
                     })
