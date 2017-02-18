@@ -63,7 +63,6 @@ router.route('/create')
 
 router.route('/all')
     .get(function (req, res) {
-        console.log('get /all')
         category.find(function (err, categories) {
             if (err) {
                 console.log(err)
@@ -72,7 +71,7 @@ router.route('/all')
             res.json({
                 data: categories
             })
-        })
+        }).sort("name")
     });
 
 router.route('/delete/:id')

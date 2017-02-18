@@ -51,6 +51,7 @@ router.route('/create')
         newProduct.discontinued = req.body.discontinued;
         newProduct.type = req.body.type;
         newProduct.date_added = new Date();
+
         newProduct.save(function (err, product) {
             if (err) {
                 console.log(err)
@@ -108,6 +109,21 @@ router.route('/all')
         }).sort("name")
     });
 
+
+router.route('/product-page/:id')
+    .get(function (req, res) {
+        product.findOne({_id:req.params.id
+        },
+            function (err, product) {
+            if (err) {
+                console.log(err)
+                return
+            }
+            res.json({
+                data: product
+            })
+        })
+    });
 
 router.route('/delete/:id')
     .post(function (req, res) {
