@@ -38,7 +38,6 @@ router.route('/create')
             var newUser = new userModel();
             newUser.username = req.body.username;
             newUser.email = req.body.email;
-            console.log(req.body.password);
             newUser.password = passwordHash.generate(req.body.password);
             newUser.firstName = req.body.firstName;
             newUser.lastName = req.body.lastName;
