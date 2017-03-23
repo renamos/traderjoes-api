@@ -72,14 +72,14 @@ router.route('/log-in')
                 //check if user exists
                 if (!user) {
                     res.json({
-                        message: 'Email does not exist.'
+                        error: 'Email does not exist.'
                     })
                     return
                 }
                 //check if password is correct
                 if (!passwordHash.verify(req.body.password, user.password)) {
                     res.json({
-                        message: 'Password is incorrect.'
+                        error: 'Password is incorrect.'
                     })
                     return
                 }
