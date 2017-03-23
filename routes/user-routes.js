@@ -30,7 +30,7 @@ router.route('/create')
             //User exists, so we send a message
             if (user) {
                 res.json({
-                    message: 'User already exists!'
+                    error: 'User already exists!'
                 })
                 return
             }
@@ -43,14 +43,16 @@ router.route('/create')
             newUser.lastName = req.body.lastName;
             newUser.city = req.body.city;
             newUser.state = req.body.state;
-            newUser.save(function (err) {
+
+            newUser.save(function (err, user) {
                 if (err) {
                     console.log(err)
                     return
                 }
 
                 res.json({
-                    message: 'User has been created!'
+                    message: 'User has been created!',
+                    data: user
                 })
 
             })
